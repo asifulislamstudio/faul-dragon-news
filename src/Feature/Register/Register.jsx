@@ -1,23 +1,14 @@
 import { FaEye, FaEyeSlash, FaGithub } from "react-icons/fa6";
-import Navbar from "../../Pages/Shared/Navbar/Navbar";
 import { useState } from "react";
+import Navbar from "../../Pages/Shared/Navbar/Navbar";
 import { Link } from "react-router-dom";
 
-const Login = () => {
-    const [showPassword, setShowPassword] = useState(false)
-
-    const handleLogin = e =>{
-        e.preventDefault();
-        console.log(e.currentTarget);
-        const form = new FormData(e.currentTarget);
-        
-    }
-
+const Register = () => {
+    const [showPassword, setShowPassword] = useState([])
     return (
-        
-      <section>
-        <Navbar></Navbar>
-          <div className="p-44">
+        <div>
+            <Navbar></Navbar>
+            <div className="p-44">
             <div className="flex h-full items-center justify-center md:p-0">
                 <div className="flex h-full w-full overflow-hidden rounded-xl shadow-md">
                     {/* design side  */}
@@ -27,14 +18,20 @@ const Login = () => {
                         <div className="absolute -right-7 top-[50%] h-14 w-14 -translate-y-1/2 rounded-full bg-gradient-to-br from-white via-rose-400 to-rose-700 transition-all"></div>
                         <div className="absolute left-[50%] top-[22%] h-24 w-24 -translate-x-1/2 rounded-full bg-gradient-to-br from-white via-rose-400 to-rose-700"></div>
                         <div className="z-10 space-y-2 text-center">
-                            <h2 className="text-3xl font-medium text-white/80">Welcome Back</h2>
+                            <h2 className="text-3xl font-medium text-white/80">Welcome</h2>
                             <p className="animate-pulse text-sm text-white/60">Please Enter You Information</p>
                         </div>
                     </div>
                     {/* form side  */}
                     <div className="flex w-full flex-col justify-center bg-white py-10 lg:w-[60%] dark:bg-zinc-900">
-                        <h2 className="pb-8 text-center text-3xl font-semibold tracking-tight text-white">Sign In</h2>
-                        <form onSubmit={handleLogin} className="flex w-full flex-col items-center justify-center gap-4">
+                        <h2 className="pb-8 text-center text-3xl font-semibold tracking-tight text-white">Register</h2>
+                        <form  className="flex w-full flex-col items-center justify-center gap-4">
+                        <input
+                                className="w-[80%] rounded-lg border border-rose-700 bg-transparent py-2 pl-4 text-zinc-600 focus:outline-none focus:ring-2 focus:ring-rose-400/50 md:w-[60%] dark:text-zinc-400"
+                                type="text"
+                                placeholder="Your Name"
+                                name="name"
+                            />
                             <input
                                 className="w-[80%] rounded-lg border border-rose-700 bg-transparent py-2 pl-4 text-zinc-600 focus:outline-none focus:ring-2 focus:ring-rose-400/50 md:w-[60%] dark:text-zinc-400"
                                 type="email"
@@ -49,7 +46,7 @@ const Login = () => {
                                 name="password"
                                 required
                             />
-                            <span className="absolute right-[360px] top-[423px] text-xl text-rose-700" onClick={() => setShowPassword(!showPassword)}>
+                            <span className="absolute right-[360px] top-[480px] text-xl text-rose-700" onClick={() => setShowPassword(!showPassword)}>
                                 {
                                 
                                 showPassword ? <FaEyeSlash></FaEyeSlash> : <FaEye></FaEye>
@@ -94,8 +91,8 @@ const Login = () => {
                 </div>
             </div>
         </div>
-      </section>
+        </div>
     );
 };
 
-export default Login;
+export default Register;
