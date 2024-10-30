@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import avataronline from "../../../assets/user.png"
 import Header from "../Header/Header";
 
@@ -48,7 +48,7 @@ const Navbar = () => {
     <img src={avataronline}></img>
   </div>
 </div>
-<a className="btn">Login</a>
+<Link to="/login" className="btn">Login</Link>
   </div>
 </div>
         </div>
