@@ -1,9 +1,22 @@
 import { Link, NavLink } from "react-router-dom";
 import avataronline from "../../../assets/user.png"
 import Header from "../Header/Header";
+import { useContext } from "react";
+import { AuthContext } from "../../../Providers/AuthProvider";
+import toast, { Toaster } from 'react-hot-toast';
 
 const Navbar = () => {
+  const {user, logOut } = useContext(AuthContext)
 
+  const handleSignOut = () => {
+      logOut()
+      .then((res) =>{
+         toast(`Logout Successful`)}
+         
+      )
+      
+      .catch(err => toast(`Try Again${err}`))
+  }
     const navlinks =<>
     <li><NavLink to="/">Home</NavLink></li>
     <li><NavLink to="/about">About</NavLink></li>
@@ -48,9 +61,18 @@ const Navbar = () => {
     <img src={avataronline}></img>
   </div>
 </div>
-<Link to="/login" className="btn">Login</Link>
+{
+  user ? 
+  <button onClick={handleSignOut} className="btn">Log Out</button>
+  :
+<Link to="/login" className="btn">
+  Login
+  </Link>
+}
+
   </div>
 </div>
+<Toaster/>
         </div>
     );
 };

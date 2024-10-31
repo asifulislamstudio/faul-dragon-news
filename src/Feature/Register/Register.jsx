@@ -1,10 +1,34 @@
 import { FaEye, FaEyeSlash, FaGithub } from "react-icons/fa6";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import Navbar from "../../Pages/Shared/Navbar/Navbar";
 import { Link } from "react-router-dom";
-
+import { AuthContext } from "../../Providers/AuthProvider";
+import toast, { Toaster } from 'react-hot-toast';
 const Register = () => {
-    const [showPassword, setShowPassword] = useState([])
+
+    const { createUser } =  useContext(AuthContext)
+
+
+    const handleRegister = e =>{
+        e.preventDefault();
+        const form = new FormData(e.currentTarget);
+        const name = form.get('name');
+        const email = form.get('email');
+        const password = form.get('password');
+
+        //Creat User
+        createUser(email,password)
+        .then((res) => {
+            
+            toast('User Created Successfuly')
+        
+        })
+        .catch(error => toast(error.message))
+        
+
+
+    }
+    const [showPassword, setShowPassword] = useState(false)
     return (
         <div>
             <Navbar></Navbar>
@@ -25,12 +49,18 @@ const Register = () => {
                     {/* form side  */}
                     <div className="flex w-full flex-col justify-center bg-white py-10 lg:w-[60%] dark:bg-zinc-900">
                         <h2 className="pb-8 text-center text-3xl font-semibold tracking-tight text-white">Register</h2>
-                        <form  className="flex w-full flex-col items-center justify-center gap-4">
+                        <form onSubmit={handleRegister} className="flex w-full flex-col items-center justify-center gap-4">
                         <input
                                 className="w-[80%] rounded-lg border border-rose-700 bg-transparent py-2 pl-4 text-zinc-600 focus:outline-none focus:ring-2 focus:ring-rose-400/50 md:w-[60%] dark:text-zinc-400"
                                 type="text"
                                 placeholder="Your Name"
                                 name="name"
+                            />
+                        <input
+                                className="w-[80%] rounded-lg border border-rose-700 bg-transparent py-2 pl-4 text-zinc-600 focus:outline-none focus:ring-2 focus:ring-rose-400/50 md:w-[60%] dark:text-zinc-400"
+                                type="url"
+                                placeholder="Photo Url"
+                                name="Profile Pic"
                             />
                             <input
                                 className="w-[80%] rounded-lg border border-rose-700 bg-transparent py-2 pl-4 text-zinc-600 focus:outline-none focus:ring-2 focus:ring-rose-400/50 md:w-[60%] dark:text-zinc-400"
@@ -54,7 +84,7 @@ const Register = () => {
                                 }</span>
                             
                             <p className="text-[14px] text-gray-400">
-                                Do not have an account ?  <Link to="/register" className="text-red-700">Register</Link>
+                                Already have an account ?  <Link to="/login" className="text-red-700">Log in</Link>
                             </p>
                             <button className="uppercase w-[80%] rounded-lg bg-rose-700 px-6 py-2 font-medium text-white outline-none hover:bg-blue-500 md:w-[60%]" type="submit">
                                 Submit
@@ -91,6 +121,7 @@ const Register = () => {
                 </div>
             </div>
         </div>
+        <Toaster/>
         </div>
     );
 };

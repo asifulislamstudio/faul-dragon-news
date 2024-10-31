@@ -1,15 +1,36 @@
 import { FaEye, FaEyeSlash, FaGithub } from "react-icons/fa6";
 import Navbar from "../../Pages/Shared/Navbar/Navbar";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../Providers/AuthProvider";
+import toast, { Toaster } from 'react-hot-toast';
 
 const Login = () => {
+    
+    const {logInUser} = useContext(AuthContext)
+
     const [showPassword, setShowPassword] = useState(false)
+
 
     const handleLogin = e =>{
         e.preventDefault();
         console.log(e.currentTarget);
         const form = new FormData(e.currentTarget);
+
+        const email = form.get('email')
+        const password = form.get('password')
+
+        // Log in User
+        logInUser(email,password) 
+        .then((res)=>{
+            
+            toast(`login successfuly ${email}`)
+            console.log(res);
+        })
+        .catch(error => toast(`login error ${error.message}`))
+
+
+
         
     }
 
@@ -94,6 +115,7 @@ const Login = () => {
                 </div>
             </div>
         </div>
+        <Toaster/>
       </section>
     );
 };
