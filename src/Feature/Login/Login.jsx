@@ -1,15 +1,18 @@
 import { FaEye, FaEyeSlash, FaGithub } from "react-icons/fa6";
 import Navbar from "../../Pages/Shared/Navbar/Navbar";
 import { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Providers/AuthProvider";
 import toast, { Toaster } from 'react-hot-toast';
 
 const Login = () => {
     
     const {logInUser} = useContext(AuthContext)
+    const location = useLocation();
+    const navigate = useNavigate();
 
     const [showPassword, setShowPassword] = useState(false)
+    
 
 
     const handleLogin = e =>{
@@ -25,14 +28,17 @@ const Login = () => {
         .then((res)=>{
             
             toast(`login successfuly ${email}`)
-            console.log(res);
+            // navigate after login
+            navigate(location?.state ? location.state : '/')
+            
         })
         .catch(error => toast(`login error ${error.message}`))
 
-
+       
 
         
     }
+    
 
     return (
         

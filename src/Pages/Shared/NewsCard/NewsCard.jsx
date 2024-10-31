@@ -1,5 +1,7 @@
+import { Link } from "react-router-dom";
+
 const NewsCard = ({news}) => {
-    const {title, author, image_url, thumbnail_url} = news
+    const {title, author, image_url, thumbnail_url, _id} = news
     
     return (
         <div>
@@ -29,7 +31,9 @@ const NewsCard = ({news}) => {
             </div>
             {/* Post content */}
             <div className="mt-3 space-y-2 px-4">
-                <h2 className="text-lg text-black">Hey, I captured some picture recently. You can check it and share you thoughts with me. I want to listen your thoughts...{' '}<span className="cursor-pointer text-orange-400">Read more</span></h2>
+                <h2 className="text-lg text-black">Hey, I captured some picture recently. You can check it and share you thoughts with me. I want to listen your thoughts...{' '}<span  
+                
+                className="cursor-pointer text-orange-400"><Link to={`/news/${_id}`}>Read more</Link></span></h2>
             </div>
             {/* icons */}
             <div className="mt-4 flex justify-between px-4 pb-4">

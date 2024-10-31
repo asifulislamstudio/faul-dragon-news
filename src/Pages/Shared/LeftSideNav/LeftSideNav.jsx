@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import LeftNewsCard from "./LeftNewsCard/LeftNewsCard";
 
 const LeftSideNav = () => {
     const [categories, setCategories] = useState([]);
@@ -12,8 +13,14 @@ const LeftSideNav = () => {
 
     },[]);
 
+    useEffect(() => {
+        fetch('/news.json')
+        .then(res => res.json())
+        .then(data => setNewsCard(data))
+    },[]);
 
-
+    
+        
 
     return (
         // All Categoris Section
@@ -29,7 +36,12 @@ const LeftSideNav = () => {
             }
         </div>
         <div>
-            
+            {
+                newsCard.map(lNews => <LeftNewsCard 
+                key={lNews._id}
+                news={lNews}
+                ></LeftNewsCard>)
+            }
         </div>
         </div>
     );

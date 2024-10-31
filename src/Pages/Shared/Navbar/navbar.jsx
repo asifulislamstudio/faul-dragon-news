@@ -56,11 +56,15 @@ const Navbar = () => {
     </ul>
   </div>
   <div className="navbar-end">
-    <div className="avatar online mr-4">
-  <div className="w-10 rounded-full">
-    <img src={avataronline}></img>
-  </div>
-</div>
+    {
+      user ? <div className="avatar online mr-4">
+      <div className="w-10 rounded-full">
+       
+      <Link to="/myaccount"><img src={avataronline}></img></Link> 
+       
+      </div>
+    </div> : ''
+    }
 {
   user ? 
   <button onClick={handleSignOut} className="btn">Log Out</button>
